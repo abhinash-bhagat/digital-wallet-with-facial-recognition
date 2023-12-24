@@ -62,6 +62,7 @@ Current contributions to the projects
 * Abhinash Bhagat
 * Aayush Tamang
 * Subash Poudel
+  
 We welcome contributions! If you'd like to contribute to the project, please follow our [Contribution Guidelines](CONTRIBUTING.md) and contact me at bhagatabhinash143@gmail.com
 
 ## License
