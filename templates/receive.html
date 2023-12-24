@@ -1,0 +1,181 @@
+{% extends 'dash_base.html' %}
+
+{% block content %}
+
+<div class="receive-all">
+<div class="video-camera">
+    <video id="webcam"  autoplay></video>
+</div>
+<div class="right-manageReceive">
+<div class="right-camera">
+    
+</div>
+<div class="text-contentBelow">
+  <p class="paragraph">Keep the face inside the frame.<br>
+    Make sure your face is not covered 
+  </p>
+ 
+</div>
+<div>
+    <img src="/static/images/diamond.jpg" alt="Facepay Logo" class="diamond">
+    
+</div>
+</div>
+</div>
+
+<button onclick="captureAndSave()" class="proceed">Proceed</button>
+
+<div id="recognizedPopup"  style="display: none;">
+    <p id="popupMessage"></p>
+    <p id="mobileNumber"></p>
+
+    <!-- Check if the user clicked "Yes" -->
+    <div id="confirmationForm" style="display: none;">
+        <div class="sendBalance">
+            <form onsubmit="submitForm(event)" >
+                    <label for="balance">Enter Amount:</label>
+                    <input type="text" id="amount" name="balance" required>
+
+                    <label for="pin">Transaction Pin:</label>
+                    <input type="password" id="transactionPin" name="pin" required>
+                    <input type="hidden" id="mobileValue" name="mobile">
+
+                    <button type="submit" class="submitBalance">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    <button id="yesButton" onclick="showConfirmationForm()">Yes</button>
+    <button id="noButton" onclick="closePopup()">No</button>
+</div>
+<div id="overlay"></div>
+</div>
+</div>
+
+<script>
+    const webcam = document.getElementById('webcam');
+    const mobileNumberElement = document.getElementById('mobileNumber');
+    const popupMessageElement = document.getElementById('popupMessage');
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    const csrfToken = getCookie('csrftoken');
+
+    const constraints = {
+        video: true,
+    };
+
+    navigator.mediaDevices.getUserMedia(constraints)
+        .then(stream => {
+            webcam.srcObject = stream;
+        })
+        .catch(error => console.error('Error accessing webcam:', error));
+
+    function captureAndSave() {
+        canvas.width = webcam.videoWidth;
+        canvas.height = webcam.videoHeight;
+
+        context.drawImage(webcam, 0, 0, canvas.width, canvas.height);
+
+        canvas.toBlob(blob => {
+            const formData = new FormData();
+            formData.append('image_data', blob, 'captured_image.jpeg');
+
+            fetch('/process_image/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.result === "No live face detected") {
+                    // Display specific message for no user found
+                    popupMessageElement.innerText = "No live face detected!!!";
+                    mobileNumberElement.innerText = `Please try again.`;
+                }else if(data.result == 'No user found.'){
+                    popupMessageElement.innerText = "No user found in the records !";
+                    mobileNumberElement.innerText = `Please try again.`;
+                } else {
+
+                    // Display standard recognition message
+                    popupMessageElement.innerText = "Face Recognized! Confirm mobile number:";
+                    mobileNumberElement.innerText = `Mobile: +977 ${data.result}`;
+                    document.getElementById('mobileValue').value = data.result
+                }
+
+                
+                document.getElementById('recognizedPopup').style.display = 'block';
+                document.getElementById('overlay').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            })
+            .catch(error => {
+                console.error('Error sending data to backend:', error);
+            });
+        }, 'image/jpeg');
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function closePopup() {
+        document.getElementById('recognizedPopup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    function submitForm(event) {
+        event.preventDefault();
+        // Handle form submission logic here
+
+        // You can retrieve the entered amount and transaction pin using document.getElementById
+        // Example: const amount = document.getElementById('amount').value;
+        // Example: const transactionPin = document.getElementById('transactionPin').value;
+
+        // Once you handle the form submission, you can close the popup if needed
+          // Get form data
+    const formData = new FormData(event.target);
+
+    // Make AJAX request
+    fetch('/confirm-transaction/', {
+        method: 'POST',
+        body: formData,
+        headers:{
+                    'X-CSRFToken': csrfToken,
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response from the server
+        console.log(data);
+        if(data.status == 200){
+        alert('Transaction completed')
+        window.location.href= '{% url "receive" %}'
+
+        }else{
+            alert('Transaction incomplete')
+        }
+        // You can update the UI based on the server response here
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+        closePopup();
+    }
+    function showConfirmationForm(){
+        // Hide the previous content
+        document.getElementById('popupMessage').style.display = 'none';
+        document.getElementById('mobileNumber').style.display = 'none';
+
+        // Hide the "Yes" and "No" buttons
+        document.getElementById('yesButton').style.display = 'none';
+        document.getElementById('noButton').style.display = 'none';
+
+        // Display the form when the user clicks "Yes"
+        document.getElementById('confirmationForm').style.display = 'block';
+    }
+</script>
+{% endblock %}

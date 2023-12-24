@@ -1,0 +1,35 @@
+{% extends "dash_base.html" %} {% block content %}
+<div class="transaction-container-wrapper">
+  <h3>Transaction History</h3>
+  {% for transaction in transactions %}
+    <div class="transaction-container">
+      <div class="transaction-details">
+        <div>
+        
+           <p class="transaction-sender">
+            {% if transaction.transaction_type == 'withdraw' %}
+              Receiver:<p class="sender-name">{{transaction.receiver}}</p>
+            {% elif transaction.transaction_type == 'deposit' or transaction.transaction_type == 'load' %}
+              Sender: <p class="sender-name"> {{transaction.sender}}</p>
+            {% endif %}
+          </p>
+          <!-- <p class="sender-name">{{ transaction.receiver}}</p> -->
+        
+         
+        </div>
+        <div>
+          <p class="transaction-amount">
+            {% if transaction.transaction_type == 'withdraw' %}
+            -{{transaction.amount}}
+            {% elif transaction.transaction_type == 'deposit'  or transaction.transaction_type == 'load' %}
+            +{{transaction.amount}}
+            {% endif %}</p>
+
+          <p class="transaction-date">Date: {{ transaction.date }}</p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

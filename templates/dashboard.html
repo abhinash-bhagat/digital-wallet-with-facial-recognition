@@ -1,0 +1,70 @@
+{% extends "dash_base.html" %}
+
+
+{% block content %}
+
+          <!-- transfer and receive area -->
+    <div class="fundArea">
+        <div class="balanceRecPay" onclick="redirectTo('loadBalance')">
+            <i class="fa-solid fa-wallet" id='home-icon'></i><p class="icons">Load Cash</p> 
+        </div>
+        <div class="balanceRecPay" onclick="redirectTo('transferBalance')">
+            <i class="fa-solid fa-comments-dollar" id='home-icon'></i> <p class="icons">Transfer Amount</p> 
+        </div>
+        <div class="balanceRecPay" onclick="redirectTo('receive')">
+            <i class="fa-solid fa-address-card" id='home-icon'></i> <p class="icons">Receive Amount</p>
+        </div>
+    </div>
+    <h4 class="lable">Payments</h4>
+
+    <div class="payments">
+        <div class="billing">
+            <i class="fa-solid fa-plug-circle-plus"></i><p class="icons">Electricity<br>Payment</p> 
+        </div>
+        <div class="billingnew">
+            <i class="fa-solid fa-wifi"></i><p class="icons">Wifi<br>Payment</p> 
+        </div>
+        <div class="billingnew">
+            <i class="fa-solid fa-droplet"></i><p class="icons">Water Supply<br>Payment</p> 
+        </div>
+        <div class="billingnew">
+            <i class="fa-solid fa-satellite-dish"></i><p class="icons">Dish TV<br>Payment</p> 
+        </div>
+        <div class="billingnew">
+            <i class="fa-solid fa-ticket-simple"></i><p class="icons">Education<br>Payment</p> 
+        </div>
+
+    </div>
+    <h4 class="lable">Insurances</h4>
+
+    <div class="payments">
+        <div class="billing">
+            <i class="fa-solid fa-kit-medical"></i><p class="icons">Health<br>Insurance</p> 
+        </div>
+        <div class="billingnew">
+            <i class="fa-solid fa-bowl-food"></i><p class="icons">ABC<br>Insurance</p> 
+        </div>
+        <div class="billingnew">
+            <i class="fa-solid fa-user-doctor"></i><p class="icons">Annual<br>Insurance</p> 
+        </div>
+        <div class="billingnew">
+            <i class="fa-solid fa-child-reaching"></i><p class="icons">XYZ<br>Insurance</p> 
+        </div>
+        <div class="billingnew">
+            <i class="fa-solid fa-car"></i><p class="icons">Vehicle<br>Insurance</p> 
+        </div>
+
+    </div>
+        </div>
+        </div>
+
+
+
+
+        <script>
+            function redirectTo(url) {
+                window.location.href = '/' + url + '/';
+            }
+        </script>
+{% endblock  %}
+

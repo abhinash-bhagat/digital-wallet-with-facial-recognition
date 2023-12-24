@@ -1,0 +1,116 @@
+{% extends 'dash_base.html' %} {% block content %}
+<div class="container my-5 d-flex justify-content-center flex-fill">
+  <div class="d-flex justify-content-between gap-5 lh-1">
+    <!-- Profile Image Section -->
+    <form
+      method="post"
+      action="{% url 'profile' %}"
+      enctype="multipart/form-data"
+      id="imageForm"
+    >
+      {% csrf_token %}
+      <div class="profile-image-section">
+        <div class="image-container">
+          <img
+            src="{% if user_profile.profile_image %}{{ user_profile.profile_image.url }}{% else %}../static/images/avatar.png{% endif %}"
+            class="avatar"
+            width="250px"
+            height="250px"
+            id="profileImage"
+          />
+          <!-- Update label to include a 'for' attribute pointing to the correct input 'id' -->
+          <label for="fileInput" class="btn btn-secondary update-btn">
+            <i class="fa-solid fa-camera"></i> Update
+          </label>
+          <!-- Add a file input inside a label to open the camera when the label is clicked -->
+          <label for="fileInput" style="display: none">
+            <input
+              type="file"
+              id="fileInput"
+              name="profile_image"
+              accept="image/*"
+              capture="camera"
+              onchange="submitImageForm(event)"
+            />
+          </label>
+        </div>
+      </div>
+    </form>
+
+    <!-- Personal Information Section -->
+    <div class="personal-info-section">
+      <h2 class="fw-bolder header">Personal Information</h2>
+      <p class="detail-title">
+        Full Name:
+        <span class="detail d-block mt-1"
+          >{{request.user.first_name}} {{request.user.last_name}}</span
+        >
+      </p>
+      <p class="detail-title">
+        Email:
+        <span class="detail d-block mt-1">{{request.user.email}}</span>
+      </p>
+      <p class="detail-title">
+        Gender:
+        <span class="detail d-block mt-1"
+          >{% if request.user.account.gender %}{{request.user.account.gender}}
+          {% else %}null{% endif %}</span
+        >
+      </p>
+      <p class="detail-title">
+        Date Of Birth:
+        <span class="detail d-block mt-1">
+          {% if request.user.account.birthday%}{{request.user.account.birthday}} {% else %}null{% endif %}</span
+        >
+      </p>
+      <p class="detail-title">
+        Mobile:
+        <span class="detail d-block mt-1"
+          >{% if request.user.account.mobile %}{{request.user.account.mobile}}
+          {% else %}null{% endif %}</span
+        >
+      </p>
+    </div>
+  </div>
+  <div class="ms-5 pt-2">
+    <button type="button" class="btn btn-primary" onclick="redirectTo('update')">Update</button>
+  </div>
+</div>
+
+{% if messages %}
+<div class="alert alert-info" style="margin-top: 15px">
+  {% for message in messages %} {{ message }} {% endfor %}
+</div>
+{% endif %}
+
+<!-- JavaScript for Image Update -->
+<script>
+  function submitImageForm(event) {
+    const imageForm = document.getElementById("imageForm")
+
+    // Set the form action to the correct URL
+    imageForm.action = "{% url 'profile' %}"
+
+    // Display the form (if needed)
+    imageForm.style.display = "block"
+
+    // Submit the form
+    imageForm.submit()
+
+    // Prevent the default form submission to avoid page reload
+    event.preventDefault()
+  }
+</script>
+
+<script>
+  function submitImageForm(event) {
+    // You can add additional logic if needed before submitting the form
+    document.getElementById("imageForm").submit()
+  }
+  
+  function redirectTo(url) {
+      window.location.href = '/' + url + '/';  // Assuming your project is hosted at the root URL '/'
+  }
+</script>
+
+{% endblock %}

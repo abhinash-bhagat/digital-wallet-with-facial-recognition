@@ -1,0 +1,135 @@
+{% if request.user.is_authenticated %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/png" href="/static\images\facial-recognition.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Include Bootstrap CSS from CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-Ce0+YdL1Nq59P8M+2ch6V5LqLKt3JnA6g40lCx7w+Em5NFWn1Aac1yU3odaf+yiW" crossorigin="anonymous"> -->
+        <title>Dashboard | Facepay</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalnia:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/static/dashboard.css">
+        <script src="https://kit.fontawesome.com/e92fcf8dc6.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!-- top division for search and name  -->
+        <div class="topmanage">
+            <div class="sidePane">
+                <div class="facepay">
+                    <img src="/static/images/facial-recognition.png" alt="Facepay Logo" class="facepay-image">
+                    <h3 class="text-center fw-bolder my-0"> <a href="/dashboard" class="text-decoration-none text-white">Facepay</a></h3>
+                </div>
+            <div class="manageicons">
+                <div class="home" onclick="redirectTo('dashboard')">
+                    <i class="fas fa-house-user mr-2" id="menu-icon"></i> Home
+                </div>
+                <div class="home" onclick="redirectTo('transaction')">
+                    <i class="fa-sharp fa-solid fa-building-columns" id="menu-icon"></i> Transaction
+                </div>
+                <div class="home" onclick="redirectTo('requests')">
+                    <i class="fa-solid fa-code-pull-request" id="menu-icon"></i> Requests
+                </div>
+                <div class="home" onclick="redirectTo('profile')">
+                    <i class="fa-solid fa-user" id="menu-icon"></i> Profile
+                </div>
+                <div class="home" onclick="logout()">
+                    <i class="fa-solid fa-right-from-bracket" id="menu-icon"></i> Log-Out
+                </div>
+            </div>
+        </div>
+            <!-- manage content in centre -->
+            <div class="funds-top">
+            <div class="name-search">
+        <div class="search-div">
+            <div>
+            
+            <div class="search-container">
+                <input type="text" placeholder="Search Payments" class="search-box">
+                <div class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </div>
+            </div>
+        
+        </div>
+        </div>
+        <div class="customerName">
+            <!-- add js to fetch name -->
+            <div class="name-photo">
+                <div class="icon-manage">
+                    <i class="fa-regular fa-eye white-icon" id="toggleIcon"></i>
+
+                </div>
+                <p id="balance">Balance: Npr: <span id='balance-amount'> {{ user_profile.balance }}</span></p>
+                <p class="fw-bold" id="customer">{{ request.user.first_name }}</p>
+                <a href="/profile"><img src="{% if user_profile.profile_image %}{{ user_profile.profile_image.url }}{% else %}/static/images/avatar.png{% endif %}" class="defaultImg"></a>
+            </div>
+        </div>
+        </div>
+
+
+    {% block content %}
+
+    {% endblock  %}
+
+
+    <!-- footer -->
+    <footer class="footer rounded">
+        <div class="footer-content">
+        <p>&copy; 2024 Your Face Pay. All rights reserved.</p>
+        </div>
+    </footer>
+        
+    
+    <!-- Include Bootstrap JavaScript dependencies from CDN -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-Bf3L1zq00xdY1jtpZZFDEDEipYC5fj2+mx+3u81Eq8KHdeFrfTmYfPM3ZpExlIeZ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-r4z0gW51IqMHTd84BNL/SNfnybW48HMRg4ZG4F5eFQ4PbqkMB4Lp/T5UJv82YxF+ksQ" crossorigin="anonymous"></script> -->
+    <script>    
+        function logout() {
+            // Perform any necessary logout actions here
+            window.location.href = "{% url 'logout' %}";
+        }
+        function redirectTo(url) {
+            window.location.href = '/' + url + '/';  // Assuming your project is hosted at the root URL '/'
+        }
+        function toggleEyeIcon() {
+            const icon = document.getElementById('toggleIcon');
+            icon.classList.toggle('fa-eye-slash');
+            icon.classList.toggle('fa-eye');
+        }
+        // Get the eye icon and balance elements
+        const eyeIcon = document.getElementById('toggleIcon');
+        const balanceElement = document.getElementById('balance-amount');
+
+        // Add event listener to the eye icon
+        eyeIcon.addEventListener('click', toggleBalance);
+
+        // Function to toggle between hiding and displaying the balance amount
+        function toggleBalance() {
+            // Toggle the 'fa-eye' and 'fa-eye-slash' classes on the eye icon
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');
+
+            // Toggle the display based on the eye icon class
+            if (eyeIcon.classList.contains('fa-eye')) {
+                balanceElement.innerHTML = '{{ user_profile.balance }}'
+            } else {
+                balanceElement.innerHTML = 'XXXX'
+            }
+        }
+       
+    </script>
+
+    </body>
+    </html>
+
+{% else %}
+    <h1>Not Logged In</h1>
+{% endif %}

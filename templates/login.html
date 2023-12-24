@@ -1,0 +1,81 @@
+{% extends "base.html" %} {% block content %}
+<!-- form login here -->
+<div class="signup-wrapper">
+    <div class="left-div">
+      <!-- Left Column for Image -->
+      <img
+        class="graphic"
+        src="/static/images/graphic.gif"
+        alt="graphic"
+      />
+    </div>
+     <div class="right-div">
+        {% if messages %}
+        <div class="alert alert-danger" role="alert">
+          {% for message in messages %} {{ message }} {% endfor %}
+        </div>
+        {% endif %}
+        <h2
+          style="
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-weight: bold;
+            color: #3498db;
+          "
+        >
+          Login
+        </h2>
+        <form method="POST" id="loginForm" onsubmit="return validateForm()">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="username">Username or Email:</label>
+            <input type="text" id="username" name="username" required />
+            <div class="error-message" id="usernameError"></div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              class="input"
+            />
+            <div class="error-message" id="passwordError"></div>
+          </div>
+          <button type="submit" class="submit-btn btn-success">Login</button>
+        </form>
+      </div>
+  </div>
+</div>
+
+<!-- form validation   -->
+<script>
+  function validateForm() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    // Reset error messages
+    document.getElementById("usernameError").innerHTML = "";
+    document.getElementById("passwordError").innerHTML = "";
+
+    // Check if username is empty
+    if (username === "") {
+      document.getElementById("usernameError").innerHTML =
+        "Username is required";
+      return false;
+    }
+
+    // Check if password is empty
+    if (password === "") {
+      document.getElementById("passwordError").innerHTML =
+        "Password is required";
+      return false;
+    }
+
+    // If everything is valid, allow form submission
+    return true;
+  }
+</script>
+{% endblock %}

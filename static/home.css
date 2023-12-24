@@ -1,0 +1,314 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+.logo {
+
+  width: 40px;
+  margin-bottom: 5px;
+}
+
+body {
+  background-color: #ffffff;
+}
+
+.loginsinup {
+  display: flex;
+  gap:0;
+}
+
+.top {
+  background-color: #212529;
+  display: flex;
+  justify-content: end;
+  padding: 10px;
+  font-size: 5px;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+color: black;
+}
+
+.navbar {
+  height: 80px;
+  background-color: rgb(235, 235, 235);
+}
+
+.centre-top {
+  background-color: green;
+}
+
+.body-img {
+  width: 100%;
+}
+
+.floating-button {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  background-color: #007bff;
+  /* Change to your desired button background color */
+  color: #fff;
+  /* Change to your desired button text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 35%;
+  /* Adjust the top position as needed */
+  left: 58%;
+  /* Adjust the left position as needed */
+  transform: translate(-50%, -50%);
+  /* Center the text */
+  z-index: 1;
+  /* Ensure the text is above other elements */
+  color: rgb(245, 241, 241);
+  /* Text color */
+  font-size: 18px;
+  /* Adjust the font size as needed */
+}
+
+.text-overlay2 {
+  position: absolute;
+  top: 43%;
+  /* Adjust the top position as needed */
+  left: 60%;
+  /* Adjust the left position as needed */
+  transform: translate(-50%, -50%);
+  /* Center the text */
+  z-index: 1;
+  /* Ensure the text is above other elements */
+  color: white;
+  /* Text color */
+  font-size: 18px;
+  /* Adjust the font size as needed */
+}
+
+.demo {
+  background-color: #333;
+  padding-top: 50px;
+}
+
+.card {
+  background-color: rgb(250, 250, 248);
+  border-radius: 30px;
+  height: 300px;
+  width: 1100px;
+  margin-left: 75px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.loader {
+  text-align: center;
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+  margin-left: 500px;
+  margin-top: 50px;
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding:20px 10px;
+}
+.footer p{
+  margin:0;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loginform {
+  width: 400px;
+}
+
+.sinup {
+  background-color: #007bff;
+  border: #007bff;
+}
+
+.login-form {
+  width: 50px;
+  background-color: aqua;
+  text-align: center;
+  border-radius: 14px;
+  height: auto;
+  width: fit-content;
+}
+
+.login-formmanage {
+  width: 50px;
+  background-color: rgb(42, 48, 48);
+  text-align: center;
+  border-radius: 14px;
+  height: auto;
+  width: 400px;
+}
+
+.login-container {
+  width: 350px;
+  height: 250px;
+  background-color: aliceblue;
+  border-radius: 12px;
+  margin-top: 50px;
+  margin-left: 450px;
+}
+
+.submit-btn {
+  margin-left: 240px;
+  border-radius: 5px;
+  background-color: rgb(86, 223, 40);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.error-message {
+  color: red;
+  margin-top: 5px;
+}
+
+.submit-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 100px;
+}
+
+.root {
+  background-color: aqua;
+}
+
+.maindiv {
+  display: grid;
+}
+
+.main-container {
+  position: relative;
+}
+
+.slogan-container {
+  position: absolute;
+  z-index: 2;
+  color: aliceblue;
+  right: 10%;
+  top: 40%;
+  color:black;
+}
+
+.slogan-head {
+  font-size: 5rem;
+  font-weight: bolder;
+}
+.img-2{
+  color:white;
+}
+.second-container{
+  margin: 10% auto;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.slogan-description{
+  font-size:1.2rem;
+max-width: 500px;
+}
+.signup-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-div{
+  height:100%;
+  padding:1rem;
+}
+.graphic{
+  width:100%;
+}
+
+.right-div{
+  width:60%;
+  padding:2rem 3rem;
+}
+#signupForm{
+  width:80%;
+  margin:0 auto;
+}
+.captcha-button-container{
+display: flex;
+flex-direction: column;
+}
+.captcha-button-container button{
+  width: 60%;
+
+  margin:1rem auto;
+}
+.pin-form{
+  display: grid;
+  background-color: #04301b;
+  padding: 30px;
+  color: white;
+  width: 40%;
+  position: absolute;
+  left: 30%;
+  top: 30%;
+  border-radius: 21px;
+}
+.submit-pin{
+  margin-top: 30px;
+}
+.head{
+  position: absolute;
+  left: 39%;
+  top: 155px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.pin-footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding:20px 10px;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+.pin-footer p{
+  margin:0;
+}

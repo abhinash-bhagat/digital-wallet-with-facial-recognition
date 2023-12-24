@@ -1,0 +1,243 @@
+{% extends "base.html" %} 
+{% block content %}
+<!-- signup area -->
+<!-- Add a div for displaying alerts -->
+<div id="alert-container"></div>
+<div class="signup-wrapper">
+    <div class="left-div">
+      <!-- Left Column for Image -->
+      <img
+        class="graphic"
+        src="/static/images/graphic.gif"
+        alt="graphic"
+      />
+    </div>
+      <!-- Right Column for Signup Form -->
+      <div class="right-div">
+        <h2 style="
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-weight: bold;
+            color: #3498db;
+          "
+        >
+          Signup Form
+        </h2>
+          <form id="signupForm" method='POST' >
+            {% csrf_token %}
+          <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input
+              type="text"
+              id="firstName"
+              name="first_name"
+              placeholder="Enter first name"
+              required
+            />
+            <div class="error-message" id="firstNameError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input
+              type="text"
+              id="lastName"
+              name="last_name"
+              placeholder="Enter last name"
+              required
+            />
+            <div class="error-message" id="lastNameError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter email"
+              required
+            />
+          <div class="form-group">
+            <label for="mobile">Phone:</label>
+            <input
+              type="mobile"
+              id="mobile"
+              name="mobile"
+              placeholder="Enter mobile no:"
+              required
+            />
+            <div class="error-message" id="mobileError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter password"
+              required
+            />
+            <div class="error-message" id="passwordError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="password2">Re-enter Password:</label>
+            <input
+              type="password"
+              id="password2"
+              name="password2"
+              placeholder="Re-enter password"
+              required
+            />
+            <div class="error-message" id="password2"></div>
+          </div>
+
+          <div class="captcha-button-container">
+            <div id="recaptcha-container" ></div>
+            <button type='button' class="submit-btn btn-success" onclick='sendOtp()'>Signup</button>
+          </div>
+        </form>
+      </div>
+        <div class="w-50 mx-auto my-5"  style ='display: none;' id="otpVerifierContainer">
+                            <div class="mb-3">
+                                <label for="otp-number" class="form-label">OTP</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="verificationCode"
+                                    name="otp"
+                                    aria-describedby="otp field"
+                                    required
+                                />
+                                <div id="emailHelp" class="form-text">Enter the OTP number</div>
+                            </div>
+                            <button type="button" class="submit-btn" onClick="verifyOtp()" style="display: block; margin: 0 auto;">
+                                Submit
+                            </button>
+                    </div>
+</div>
+</div>
+</div>
+
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<!-- 
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCZRwpkLNegjm5qNKMT8ESfmO-WjgEl2AE",
+    authDomain: "facepay-a2bb2.firebaseapp.com",
+    projectId: "facepay-a2bb2",
+    storageBucket: "facepay-a2bb2.appspot.com",
+    messagingSenderId: "793951815746",
+    appId: "1:793951815746:web:27e4eaf95ece9d315305db",
+    measurementId: "G-KNGT305SZ7"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+  // Render captcha
+  render();
+
+  function render() {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("recaptcha-container");
+    recaptchaVerifier.render();
+  }
+
+  function showAlert(message, containerId) {
+    // Display the message in the specified container
+    document.getElementById(containerId).innerText = message;
+  }
+
+  function sendOtp() {
+    showAlert("Sending OTP", "alert-container");
+    
+    var number = '+977' + document.getElementById("mobile").value;
+    firebase
+      .auth()
+      .signInWithPhoneNumber(number, window.recaptchaVerifier)
+      .then(function (confirmationResult) {
+        window.confirmationResult = confirmationResult;
+        coderesult = confirmationResult;
+        showAlert("OTP Sent", "alert-container");
+        
+        // Adjust your visibility logic as needed
+        document.getElementById('signupForm').style.display = 'none';
+        document.getElementById('otpVerifierContainer').style.display = 'block';
+      })
+      .catch(function (error) {
+        showAlert(error.message, "alert-container");
+      });
+  }
+
+  function verifyOtp() {
+    var code = document.getElementById("verificationCode").value;
+    coderesult
+      .confirm(code)
+      .then(function () {
+        showAlert("OTP Verified", "alert-container");
+        
+        // Assuming you want to submit the form after OTP verification
+        document.getElementById('signupForm').submit();
+        showAlert("Completed submitting form", "alert-container");
+      })
+      .catch(function () {
+        showAlert("OTP Not correct", "alert-container");
+      });
+  }
+</script> -->
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyASa3oOv-JbG9oelml8P8NojOfhNc7HIHk",
+  authDomain: "facepay-project.firebaseapp.com",
+  projectId: "facepay-project",
+  storageBucket: "facepay-project.appspot.com",
+  messagingSenderId: "276837110396",
+  appId: "1:276837110396:web:456df2eba225adcec12ff9",
+  measurementId: "G-0GEVHF4G5G"
+};
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig)
+      // Render captcha
+      render()
+      function render() {
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+          "recaptcha-container"
+        )
+        recaptchaVerifier.render()
+      }
+      // function for send OTP
+      function sendOtp() {
+        var number =  '+977' + document.getElementById("mobile").value
+        firebase
+          .auth()
+          .signInWithPhoneNumber(number, window.recaptchaVerifier)
+          .then(function (confirmationResult) {
+            window.confirmationResult = confirmationResult
+            coderesult = confirmationResult
+            document.getElementById('signupForm').style.display = 'none'
+            document.getElementById('otpVerifierContainer').style.display = 'block'
+          })
+          .catch(function (error) {
+            // error in sending OTP
+            console.log(error.message)
+          })
+      }
+      // function for OTP verify
+      function verifyOtp() {
+        var code = document.getElementById("verificationCode").value
+        coderesult
+          .confirm(code)
+          .then(function () {
+            document.getElementById('signupForm').submit()
+          })
+          .catch(function (e) {
+            console.log(e)
+          })
+      }
+    </script>
+{% endblock %}

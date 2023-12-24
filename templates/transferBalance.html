@@ -1,0 +1,32 @@
+{% extends "dash_base.html" %}
+
+{% block content %}
+
+
+
+
+    {% if messages %}
+        <div class="alert alert-info" style="margin-top:15px;">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'transferBalance' %}">
+        {% csrf_token %}
+        <div class="transform-form">
+        <label for="mobile">Receiver's Mobile Number:</label>
+        <input type="text" name="mobile" required>
+
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" required><br>
+
+        <button type="submit" class="btn btn-primary">Transfer</button>
+    </form>
+
+    <p class="mt-4"> Current balance: ${{ balance }}</p>
+</div>
+
+
+{% endblock  %}

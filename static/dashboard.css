@@ -1,0 +1,534 @@
+body {
+    background-color: rgb(255, 255, 255);
+}
+
+/* search-box********************** */
+
+.search-container {
+    position: relative;
+}
+
+.search-box {
+    padding: 8px 70px 8px 80px;
+    /* Increased padding for more width */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    width: 300px;
+    /* Set your desired width */
+    position: relative;
+    left: 40px;
+}
+
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 45%;
+    /* Adjust the left position */
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #555;
+    font-size: 20px;
+}
+
+.search-div {
+    width: 600px;
+    padding-left: 50px;
+    margin-top: 20px;
+}
+
+/* search-box********************** */
+
+.topmanage {
+    display: flex;
+}
+
+.manageicons {
+    margin-top: 130px;
+    margin-left: 30px;
+}
+
+.customerName {
+    margin-top: 40px;
+    margin-left: 120px;
+}
+
+.sidePane {
+    width: 200px;
+    background-color: #223d3c;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 4px;
+}
+
+.facepay {
+    margin-left: 15px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.defaultImg {
+    height: 30px;
+    width: 30px;
+    border-radius: 35px;
+    margin-left: 7px;
+}
+
+.name-photo {
+    display: flex;
+    position: relative;
+    top: -14px;
+    left: 30px;
+}
+
+#balance {
+    padding-right: 20px;
+    color: white;
+}
+
+.home {
+    padding-left: 10px;
+    margin-top: 9px;
+    color: #fff;
+}
+
+/* for image verification ssections  */
+.facepay-image {
+    width: 50px;
+    height: auto;
+}
+
+.home:hover {
+    color: rgb(164, 229, 255);
+    /* Color on hover */
+    text-decoration: underline;
+    /* Underline on hover */
+    cursor: pointer;
+}
+
+.dots {
+    padding-left: 100px;
+    margin-top: 50px;
+}
+
+.fundArea {
+    display: flex;
+    margin-left: 55px;
+    margin-top: 40px;
+}
+
+.balanceRecPay {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    width: 270px;
+    background-color: #223d3c;
+    border-radius: 12px;
+    margin-left: 50px;
+
+    color: #fff;
+    /* padding: 10px; */
+}
+
+.balanceRecPay:hover {
+    cursor: pointer;
+    color: rgb(164, 229, 255);
+    box-shadow: 5px 5px 3px 1px #bdbdbd;
+
+}
+
+.fw-bold {
+    color: #fff;
+}
+
+.name-search {
+    display: flex;
+    background-color: #223d3c;
+    margin-top: 5px;
+    width: 83vw;
+    border-radius: 5px;
+    ;
+}
+
+.funds-top {
+    display: flex;
+    flex-direction: column;
+}
+
+.payments {
+    display: flex;
+    margin-left: 55px;
+    margin-top: 35px;
+    text-align: center;
+}
+
+.fa-solid {
+    font-size: 19px;
+}
+
+.billing {
+    height: 120px;
+    width: 180px;
+    background-color: #d4d4d4;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.billingnew {
+    background-color: #d4d4d4;
+    height: 120px;
+    width: 180px;
+    border-radius: 12px;
+    margin-left: 20px;
+    margin-bottom: 40px;
+    padding: 15px;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+}
+
+.footer-content p {
+    margin: 0;
+}
+
+.icons {
+    margin-top: 10px;
+    padding-left: 5px;
+    font-size: 19px;
+}
+
+#home-icon {
+    margin-left: 70px;
+    font-size: 21px;
+}
+
+.lable {
+    margin-left: 60px;
+    margin-top: 20px;
+}
+
+/* only for transactions area dont change class name */
+.transactions {
+    margin-top: 10px;
+}
+
+.balanceRecPay-trans {
+    height: 50px;
+    width: 170px;
+    background-color: rgb(151, 205, 182);
+    border-radius: 12px;
+    margin-right: 20px;
+    text-align: center;
+    margin-left: 60px;
+}
+
+.image-container {
+    display: grid;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    border: 2px solid #0a0a0a;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    width: 117px;
+}
+
+.Transaction-table {
+    margin-bottom: 40px;
+}
+
+.defaultImg-trans {
+    height: 55px;
+    width: 55px;
+    border-radius: 35px;
+    margin-left: 4px;
+    margin-left: 14px;
+    border: 2px solid black;
+}
+
+.fw1 {
+    margin-top: 16px;
+}
+
+.sidePane-trans {
+    width: 300px;
+    background-color: rgb(143, 207, 172);
+    margin-top: 20px;
+    margin-left: 7px;
+    border-radius: 4px;
+    height: 350px;
+}
+
+.search {
+    display: flex;
+}
+
+.header {
+    letter-spacing: 1.5px;
+    margin-bottom: 40px;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+.detail-title {
+    font-size: 18px;
+}
+
+.detail {
+    letter-spacing: 1.5px;
+}
+
+/* Receive Amount Page section */
+#recognizedPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #223d3c;
+    padding: 55px;
+    z-index: 1000;
+    text-align: center;
+    font-size: 23px;
+    color: white;
+    border-radius: 18px;
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.icon-manage {
+    color: #fff;
+    position: absolute;
+    left: -30px;
+}
+
+.video-camera {
+    margin-left: 100px;
+    margin-top: 10px;
+    height: 340px;
+    width: 370px;
+    border-radius: 16px;
+    box-shadow: 7px 7px 3px 2px #bdbdbd;
+    overflow: hidden;
+    /* Ensure the video does not overflow the rounded corners */
+}
+
+#webcam {
+    width: 100%;
+    /* Make the video fill the container */
+    height: 100%;
+    /* Make the video fill the container */
+    object-fit: cover;
+    /* Maintain aspect ratio and cover the container */
+    border-radius: 16px;
+    /* Apply the same border-radius as the container */
+}
+
+.proceed {
+    height: 40px;
+    width: 100px;
+    border-radius: 20px;
+    margin-left: 230px;
+    background-color: #223d3c;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.receive-all {
+    display: flex;
+}
+
+.right-camera {
+    margin-left: 100px;
+    margin-top: 10px;
+
+}
+
+
+.right-manageReceive {
+    display: flexbox;
+}
+
+.text-contentBelow {
+    margin-left: 65px;
+    margin-top: 70px;
+}
+
+.blink-logo {
+    height: 20px;
+    width: 20px;
+    margin-left: 20px;
+    margin-top: 4px;
+}
+
+.paragraph {
+    font-size: 30px;
+    font-family: 'Kalnia', serif;
+    font-weight: 500;
+}
+
+.diamond {
+    height: 180px;
+    margin-left: 170px;
+    animation: rotateAnimation 5s linear infinite;
+    position: relative;
+    z-index:-1;
+    /* Adjust duration and timing function as needed */
+}
+
+@keyframes rotateAnimation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* .................................... */
+.loadbalance-form {
+    display: grid;
+    width: 400px;
+    margin-left: 320px;
+    background-color: #223d3c;
+    padding: 20px;
+    border-radius: 12px;
+    color: #f2f2f2;
+    margin-bottom: 20px;
+}
+
+.loadbalancesubmit-button {
+    height: 45px;
+    width: 100px;
+    background-color: #223d3c;
+    color: #ffffff;
+    border-radius: 7px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 160px;
+}
+
+
+.transform-form {
+    display: grid;
+    width: 400px;
+    margin-left: 320px;
+    margin-top: 20px;
+    background-color: #223d3c;
+    padding: 20px;
+    border-radius: 7px;
+    color: #ffffff;
+    margin-bottom: 190px;
+
+}
+.transaction-container-wrapper {
+  width: 100%;
+  max-width: 500px;
+  margin: 1rem auto;
+}
+
+.transaction-container-wrapper  h3{
+    text-align: center;
+    margin:2rem 0;
+}
+.transaction-container {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin:1.5rem auto;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction-details {
+    width:100%;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction-amount {
+  font-weight: bold;
+  color: green;
+  text-align:end;
+
+}
+
+.transaction-sender {
+  font-weight: bold;
+  color: #333;
+}
+
+
+.sender-name{
+  font-weight: bold;
+    font-size:1.6rem;
+}
+
+.transaction-date {
+  color: #888;
+}
+.load-balance-form{
+    width:60%;
+    margin:10% auto;
+background-color: #223d3c;
+padding:20px 30px;
+border-radius:21px;
+color:white;
+}
+.load-balance-form .svg-container{
+text-align: center;
+padding:1rem 8px;
+}
+#confirmationForm{
+    display: flex;
+    flex-direction: column;
+}
+#confirmationForm button{
+    margin:1rem auto;
+}

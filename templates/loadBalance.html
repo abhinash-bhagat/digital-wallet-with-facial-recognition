@@ -1,0 +1,60 @@
+{% extends "dash_base.html" %} {% block content %}
+
+
+<form class="load-balance-form" method="post" id="payment-form">
+  {% csrf_token %}
+  <div class="svg-container">
+    <img src="/static/images/facial-recognition.png" alt="Facepay Logo" class="facepay-image">
+  </div>
+  <div class="mb-3">
+    <label for="amount" class="form-label">Amount:</label>
+    <input type="text" class="form-control" id="amount" name="amount" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="creditCardNo" class="form-label">Card Number</label>
+    <input type="text" class="form-control" id="creditCardNo" maxlength="16">
+  </div>
+  <div class="mb-3">
+    <label for="cvv" class="form-label">CVV</label>
+    <input type="text" class="form-control" id="cvv" maxlength="3">
+  </div>
+  <div class="mb-3">
+    <label for="expiryDate" class="form-label">Expiry Date</label>
+    <input type="date" class="form-control" id="expiryDate">
+  </div>
+  <button  class="btn btn-primary">Submit</button>
+</form>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  var stripe = Stripe("{{ settings.STRIPE_PUBLIC_KEY }}");
+  var elements = stripe.elements();
+
+  // Create an instance of the card Element.
+  var card = elements.create("card");
+
+  // Add an instance of the card Element into the card-element div.
+  card.mount("#card-element");
+
+  // Handle form submission.
+  var form = document.getElementById("payment-form");
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    stripe
+      .confirmCardPayment("{{ client_secret }}", {
+        payment_method: { card: card },
+      })
+      .then(function (result) {
+        if (result.error) {
+          // Display error.message to the user
+          var errorElement = document.getElementById("card-errors");
+          errorElement.textContent = result.error.message;
+        } else {
+          // The payment succeeded, handle the success and update the balance
+        }
+      });
+  });
+</script>
+
+{% endblock %}

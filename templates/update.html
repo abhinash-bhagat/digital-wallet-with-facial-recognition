@@ -1,0 +1,140 @@
+{% extends "dash_base.html" %}
+{% block content %}
+<div class="container mt-5">
+        <form id="myForm" method='POST' onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Enter your first name" required>
+            </div>
+    
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Enter your last name" required>
+            </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="name@facepay.com" required>
+            <div class="invalid-feedback">
+                Please enter a valid email address.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                <label class="form-check-label" for="male">
+                    Male
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                <label class="form-check-label" for="female">
+                    Female
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="other" value="other">
+                <label class="form-check-label" for="other">
+                    Other
+                </label>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="birthday" class="form-label">Date of Birth</label>
+            <input type="date" name="birthday" class="form-control" id="birthday" required>
+            <div class="invalid-feedback">
+                Age must be 18 or above.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="mobile" class="form-label">Phone Number</label>
+            <input type="tel" name="mobile" class="form-control" id="mobile" placeholder="Enter your phone number" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary m-4">Submit</button>
+    </form>
+</div>
+</div>
+</div>
+<script>
+// script.js
+
+var typingTimer;
+var doneTypingInterval = 10;  // for time variables 
+
+document.getElementById('email').addEventListener('input', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(doneTyping, doneTypingInterval);
+});
+
+function doneTyping() {
+    var emailInput = document.getElementById('email');
+    var isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+    if (isValid) {
+        emailInput.classList.remove('is-invalid');
+    } else {
+        emailInput.classList.add('is-invalid');
+    }
+}
+
+document.getElementById('birthday').addEventListener('input', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(validateAge, doneTypingInterval);
+});
+
+function validateAge() {
+    var dobInput = document.getElementById('birthday');
+    var enteredDate = new Date(dobInput.value);
+    var today = new Date();
+
+    // Calculate age
+    var age = today.getFullYear() - enteredDate.getFullYear();
+    var monthDiff = today.getMonth() - enteredDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < enteredDate.getDate())) {
+        age--;
+    }
+
+    // Validate age
+    if (age > 18) {
+        dobInput.classList.remove('is-invalid');
+    } else {
+        dobInput.classList.add('is-invalid');
+    }
+}
+
+document.getElementById('mobile').addEventListener('input', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(validatePhoneNumber, doneTypingInterval);
+});
+
+function validatePhoneNumber() {
+    var phoneNumberInput = document.getElementById('mobile');
+    var inputValue = phoneNumberInput.value;
+
+    // Limit input to 10 digits
+    inputValue = inputValue.slice(0, 10);
+
+    phoneNumberInput.value = inputValue; // Update input value
+
+    // Validate the truncated phone number
+    var isValid = /^98\d{0,8}$/.test(inputValue);
+    if (isValid) {
+        phoneNumberInput.classList.remove('is-invalid');
+    } else {
+        phoneNumberInput.classList.add('is-invalid');
+    }
+}
+
+function validateForm() {
+
+    validatePhoneNumber();
+
+
+
+    return true; 
+}
+
+</script>
+{% endblock  %}
